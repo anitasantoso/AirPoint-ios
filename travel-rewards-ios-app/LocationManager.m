@@ -11,8 +11,9 @@
 #define kDistanceFilter 1
 
 @interface LocationManager()
-@property (nonatomic, strong) CLLocationManager *locMgr;
+
 @property (nonatomic, strong) NSTimer *locUpdateTimer;
+@property (nonatomic, strong) NSArray *beaconRegions;
 @end
 
 @implementation LocationManager
@@ -28,6 +29,21 @@ JTSYNTHESIZE_SINGLETON_FOR_CLASS(LocationManager)
     return self;
 }
 
+- (void)monitorBeaconRegions {
+    NSMutableArray *regions = [NSMutableArray new];
+    for(NSString *uuid in @[@"FD7B7966-9C0F-471A-83A2-46D995AE85A1", @"114A4DD8-5B2F-4800-A079-BDCB21392BE9"]) {
+        CLBeaconRegion *region = [[CLBeaconRegion alloc] initWithProximityUUID:[[NSUUID alloc] initWithUUIDString:uuid] identifier:@"estimote"];
+        region.notifyEntryStateOnDisplay = YES;
+        [regions addObject:region];
+        [self.locMgr stopMonitoringForRegion:region];
+        [self.locMgr stopRangingBeaconsInRegion:region];
+        
+        [self.locMgr startMonitoringForRegion:region];
+        [self.locMgr requestStateForRegion:region];
+    }
+    self.beaconRegions = regions;
+}
+
 - (void)startUpdatingLocation {
     [self.locMgr startUpdatingLocation];
     [self checkLocation];
@@ -35,6 +51,8 @@ JTSYNTHESIZE_SINGLETON_FOR_CLASS(LocationManager)
     // poll every 2 seconds
     [self.locUpdateTimer invalidate];
     self.locUpdateTimer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(checkLocation) userInfo:nil repeats:YES];
+    
+    [self monitorBeaconRegions];
 }
 
 - (void) handleNewLocation:(CLLocation *)location {
@@ -113,6 +131,55 @@ JTSYNTHESIZE_SINGLETON_FOR_CLASS(LocationManager)
     if(status != kCLAuthorizationStatusAuthorized) {
         NSLog(@"Authorisation status did change");
     }
-    
 }
+
+#pragma mark - beacon stuff
+- (NSString*)proximityString:(CLProximity)proximity {
+    switch (proximity) {
+        case CLProximityImmediate:
+            return @"Immediate";
+        case CLProximityNear:
+            return @"Near";
+        case CLProximityFar:
+            return @"Far";
+        case CLProximityUnknown:
+        default:
+            return @"Unknown";
+    }
+}
+
+- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLBeaconRegion *)region {
+//    [self addStatus:SF(@"Entered Region %@",region.identifier)];
+    [manager startRangingBeaconsInRegion:region];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLBeaconRegion *)region
+{
+//    [self addStatus:SF(@"Left Region %@",region.identifier)];
+//    [manager stopRangingBeaconsInRegion:region];
+}
+
+// Note: this is not being called
+- (void)locationManager:(CLLocationManager *)manager didRangeBeacons:(NSArray *)beacons inRegion:(CLBeaconRegion *)region {
+
+    //add back what we have now
+    for (CLBeacon *beacon in beacons){
+        if(beacon.proximity == CLProximityFar) {
+            [self.delegate didFindBeacon:beacon];
+        }
+        NSLog(@"Proximity %@", [self proximityString:beacon.proximity]);
+        NSLog(@"%@", beacon);
+    }
+    
+//    [self checkClosestBeacon];
+}
+
+- (void)locationManager:(CLLocationManager *)manager rangingBeaconsDidFailForRegion:(CLBeaconRegion *)region withError:(NSError *)error
+{
+//    [self addStatus:SF(@"error Ranging Beacons in Region %@: %@",region.identifier, error)];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)regionState forRegion:(CLBeaconRegion *)region {
+}
+
 @end

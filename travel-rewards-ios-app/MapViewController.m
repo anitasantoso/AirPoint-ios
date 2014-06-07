@@ -9,6 +9,8 @@
 #import "MapViewController.h"
 #import <CoreLocation/CoreLocation.h>
 
+#define kLocationUpdateNotification @"updateNotification"
+
 @interface MapViewController ()
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) CLLocation *lastLocation;
@@ -30,21 +32,15 @@
 {
     [super viewDidLoad];
     [LocationManager sharedInstance].delegate = self;
+    [[LocationManager sharedInstance] startUpdatingLocation];
     
+    // pebble
     [[PBPebbleCentral defaultCentral] setDelegate:self];
     
     self.watch = [[PBPebbleCentral defaultCentral] lastConnectedWatch];
     if(self.watch) {
         [self showDummyNotification];
     }
-//    self.scrollView
-	// Do any additional setup after loading the view.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - location update delegate
@@ -52,6 +48,11 @@
 - (void)locationMovedTo:(CLLocation*)location {
     
     self.lastLocation = location;
+}
+
+- (void)didFindBeacon:(CLBeacon*)beacon {
+    // show popup
+    [self showDummyNotification];
 }
 
 #pragma mark - pebble delegate
@@ -75,4 +76,5 @@
     localNotification.timeZone = [NSTimeZone defaultTimeZone];
     [[UIApplication sharedApplication] presentLocalNotificationNow:localNotification];
 }
+
 @end
