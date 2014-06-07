@@ -30,6 +30,12 @@
 		08C5266F194273D300523A5B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08C5266E194273D300523A5B /* CoreLocation.framework */; };
 		08C5267219427DA600523A5B /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C5267119427DA600523A5B /* MapViewController.m */; };
 		08C526771942805A00523A5B /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 08C526761942805A00523A5B /* LocationManager.m */; };
+		08D60A681942AE900032C562 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 08D60A671942AE900032C562 /* background.png */; };
+		08D60A6B1942AF020032C562 /* notification.png in Resources */ = {isa = PBXBuildFile; fileRef = 08D60A691942AF020032C562 /* notification.png */; };
+		08D60A6C1942AF020032C562 /* notification2.png in Resources */ = {isa = PBXBuildFile; fileRef = 08D60A6A1942AF020032C562 /* notification2.png */; };
+		08D60A6E1942AF5A0032C562 /* blankBeacon.png in Resources */ = {isa = PBXBuildFile; fileRef = 08D60A6D1942AF5A0032C562 /* blankBeacon.png */; };
+		08D60A711942AF780032C562 /* 3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08D60A6F1942AF780032C562 /* 3x.png */; };
+		08D60A721942AF780032C562 /* 5x.png in Resources */ = {isa = PBXBuildFile; fileRef = 08D60A701942AF780032C562 /* 5x.png */; };
 		CB00CC8845C540B79FB33457 /* libPods-travel-rewards-ios-app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38CA11960656409BAEF25F15 /* libPods-travel-rewards-ios-app.a */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +81,12 @@
 		08C526761942805A00523A5B /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		08C526781942806700523A5B /* LocationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
 		08C52679194280F200523A5B /* JTSingleton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JTSingleton.h; sourceTree = "<group>"; };
+		08D60A671942AE900032C562 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background.png; sourceTree = "<group>"; };
+		08D60A691942AF020032C562 /* notification.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notification.png; sourceTree = "<group>"; };
+		08D60A6A1942AF020032C562 /* notification2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notification2.png; sourceTree = "<group>"; };
+		08D60A6D1942AF5A0032C562 /* blankBeacon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blankBeacon.png; sourceTree = "<group>"; };
+		08D60A6F1942AF780032C562 /* 3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 3x.png; sourceTree = "<group>"; };
+		08D60A701942AF780032C562 /* 5x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 5x.png; sourceTree = "<group>"; };
 		38CA11960656409BAEF25F15 /* libPods-travel-rewards-ios-app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-travel-rewards-ios-app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E9BE8EBEC624384B6EAC0FF /* Pods-travel-rewards-ios-app.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-travel-rewards-ios-app.xcconfig"; path = "Pods/Pods-travel-rewards-ios-app.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -153,6 +165,12 @@
 		08C5263D1942739600523A5B /* travel-rewards-ios-app */ = {
 			isa = PBXGroup;
 			children = (
+				08D60A691942AF020032C562 /* notification.png */,
+				08D60A6A1942AF020032C562 /* notification2.png */,
+				08D60A671942AE900032C562 /* background.png */,
+				08D60A6D1942AF5A0032C562 /* blankBeacon.png */,
+				08D60A6F1942AF780032C562 /* 3x.png */,
+				08D60A701942AF780032C562 /* 5x.png */,
 				08C52679194280F200523A5B /* JTSingleton.h */,
 				08C526781942806700523A5B /* LocationManager.h */,
 				08C526761942805A00523A5B /* LocationManager.m */,
@@ -276,7 +294,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08D60A6B1942AF020032C562 /* notification.png in Resources */,
+				08D60A6C1942AF020032C562 /* notification2.png in Resources */,
 				08C526501942739600523A5B /* Images.xcassets in Resources */,
+				08D60A721942AF780032C562 /* 5x.png in Resources */,
+				08D60A6E1942AF5A0032C562 /* blankBeacon.png in Resources */,
+				08D60A711942AF780032C562 /* 3x.png in Resources */,
+				08D60A681942AE900032C562 /* background.png in Resources */,
 				08C526421942739600523A5B /* InfoPlist.strings in Resources */,
 				08C5264B1942739600523A5B /* Main.storyboard in Resources */,
 			);

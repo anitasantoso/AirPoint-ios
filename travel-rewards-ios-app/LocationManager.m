@@ -39,7 +39,8 @@ JTSYNTHESIZE_SINGLETON_FOR_CLASS(LocationManager)
         [self.locMgr stopRangingBeaconsInRegion:region];
         
         [self.locMgr startMonitoringForRegion:region];
-        [self.locMgr requestStateForRegion:region];
+        [self.locMgr startRangingBeaconsInRegion:region];
+//        [self.locMgr requestStateForRegion:region];
     }
     self.beaconRegions = regions;
 }
